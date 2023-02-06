@@ -22,51 +22,33 @@
     </header>
 
     <!-- Sidebar -->
-    <div class="sidebar-container">
-      <div class="searchbar">
-        <h2>Search for a City:</h2>
-        <textarea id="search"></textarea>
-        <!-- Change to input type text -->
-        <button class="btn btn-primary" id="searchBtn">Search</button>
-      </div>
+    <div class="sidebar container">
+      <form class="searchBar">
+        <label>Search for a City:</label>
+        <input type="text" id="search"></input>
+        <button type="submit" class="btn btn-primary" id="searchBtn">Search</button>
+      </form>
 
       <ul class="city-list"></ul>
     </div>
 
     <!-- Today's Forecast -->
-    <div class="main-container">
-      <div class="card main">
-        <h2 class="card-title"></h2>
-        <p class="card-text"></p>
-      </div>
+    <div class="container" id="main">
     </div>
 
     <!-- 5-Day Forecast -->
     <div class="weekly-container">
-      <h2 class="weekly-title"></h2>
-      <div class="row">
-        <div class="card day-1">
-          <h2 class="card-title"></h2>
-          <p class="card-text"></p>
-        </div>
-        <div class="card day-2">
-          <h2 class="card-title"></h2>
-          <p class="card-text"></p>
-        </div>
-        <div class="card day-3">
-          <h2 class="card-title"></h2>
-          <p class="card-text"></p>
-        </div>
-        <div class="card day-4">
-          <h2 class="card-title"></h2>
-          <p class="card-text"></p>
-        </div>
-        <div class="card day-5">
-          <h2 class="card-title"></h2>
-          <p class="card-text"></p>
-        </div>
+      <h2 class="weekly-title">5 Day Forecast</h2>
+      <div class="card-body" id="forecast">
       </div>
     </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
 
     <script src="script.js"></script>
   </body>
