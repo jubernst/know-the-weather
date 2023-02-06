@@ -14,8 +14,9 @@ function getLocationAPI(city) {
   var geoQueryURL =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     city +
-    "&appid=" +
+    "&limit=1&appid=" +
     APIKey;
+  // Fetch doesn't work even for valid cities but I can't tell you why
   fetch(geoQueryURL).then(function (response) {
     // If the input is a valid city
     if (response.ok) {
@@ -45,33 +46,39 @@ function getWeatherAPI(lat, lon, cName) {
     APIKey +
     "&units=imperial";
   fetch(weatherQueryURL).then(function (response) {
-    response.json().then(function (data) {
-      // Clear children from main
-      removeAllChildNodes(mainContainer);
+    // Catch errors
+    if (response.ok) {
+      response.json().then(function (data) {
+        // Clear children from main
+        removeAllChildNodes(mainContainer);
 
-      // Create a card with the weather today
-      var mainCard = document.createElement("div");
+        // Create a card with the weather today
+        var mainCard = document.createElement("div");
 
-      var mainTitle = document.createElement("h2");
-      mainTitle.textContent = cName + " " + dayjs(data.dt) + data.weather.icon;
+        var mainTitle = document.createElement("h2");
+        mainTitle.textContent =
+          cName + " " + dayjs(data.dt) + data.weather.icon;
 
-      var mainWeather = document.createElement("p");
-      mainWeather.textContent =
-        "Temp: " +
-        data.main.temp +
-        "F\n" +
-        "Wind: " +
-        data.wind.speed +
-        " MPH\n" +
-        "Humidity: " +
-        data.main.humidity +
-        " %";
+        var mainWeather = document.createElement("p");
+        mainWeather.textContent =
+          "Temp: " +
+          data.main.temp +
+          "F\n" +
+          "Wind: " +
+          data.wind.speed +
+          " MPH\n" +
+          "Humidity: " +
+          data.main.humidity +
+          " %";
 
-      mainCard.append(mainTitle, mainWeather);
-      mainContainer.appendChild(mainCard);
+        mainCard.append(mainTitle, mainWeather);
+        mainContainer.appendChild(mainCard);
 
-      getForecastAPI(cName);
-    });
+        getForecastAPI(cName);
+      });
+    } else {
+      alert("Error: " + response.statusText);
+    }
   });
 }
 
@@ -116,6 +123,7 @@ function getForecastAPI(name) {
   });
 }
 
+// Show the recent searches using localStorage
 function setRecentSearches() {
   var cityList = $(".city-list");
   removeAllChildNodes(cityList);
