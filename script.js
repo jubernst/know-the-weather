@@ -22,7 +22,7 @@ function getLocationAPI(city) {
       response.json().then(function (data) {
         // Save the city name to localStorage
         var cityName = data.name;
-        localStorage.setItem(city, cityName);
+        localStorage.setItem(cityName, cityName);
 
         var lat = data.lat;
         var lon = data.lon;
@@ -69,7 +69,6 @@ function getWeatherAPI(lat, lon, cName) {
 
       mainCard.append(mainTitle, mainWeather);
       mainContainer.appendChild(mainCard);
-      //mainCard.addClass("card");
 
       getForecastAPI(cName);
     });
@@ -92,8 +91,6 @@ function getForecastAPI(name) {
       // Create cards for the 5 day forecast
       for (var i = 0; i < 5; i++) {
         var card = document.createElement("div");
-        //card.addClass("card");
-        //card.addClass("text-bg-dark");
 
         var cardTitle = document.createElement("h2");
         cardTitle.textContent =
@@ -119,6 +116,17 @@ function getForecastAPI(name) {
   });
 }
 
+function setRecentSearches() {
+  var cityList = $(".city-list");
+  removeAllChildNodes(cityList);
+
+  for (var i = 0; i < localStorage.length; i++) {
+    var recentSearch = document.createElement("li");
+    recentSearch.textContent = localStorage.key(i);
+    cityList.append(recentSearch);
+  }
+}
+
 searchBtn.on("click", function (event) {
   event.preventDefault();
 
@@ -126,6 +134,7 @@ searchBtn.on("click", function (event) {
 
   if (inputCity) {
     getLocationAPI(inputCity);
+
+    setRecentSearches;
   }
-  // Set recent searches
 });
