@@ -16,8 +16,16 @@ function getLocationAPI(city) {
     city +
     "&limit=1&appid=" +
     APIKey;
-  // Fetch doesn't work even for valid cities but I can't tell you why
-  fetch(geoQueryURL).then(function (response) {
+  // CORS error
+  fetch(geoQueryURL, {
+    method: "GET",
+    body: JSON.stringify(data),
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(function (response) {
+    console.log(response);
     // If the input is a valid city
     if (response.ok) {
       response.json().then(function (data) {
@@ -57,7 +65,7 @@ function getWeatherAPI(lat, lon, cName) {
 
         var mainTitle = document.createElement("h2");
         mainTitle.textContent =
-          cName + " " + dayjs(data.dt) + data.weather.icon;
+          cName + " " + dayjs(data.dt).format("D/MM/YYYY") + data.weather.icon;
 
         var mainWeather = document.createElement("p");
         mainWeather.textContent =
