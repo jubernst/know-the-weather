@@ -2,8 +2,6 @@ var searchBtn = $("#searchBtn");
 var mainContainer = $("#main");
 var forecastContainer = $("#forecast");
 
-var APIKey = "75057e7bd9899dd0671687e4e687b5b6";
-
 function removeAllChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
@@ -15,7 +13,7 @@ function getLocationAPI(city) {
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     city +
     "&limit=1&appid=" +
-    APIKey;
+    "92878b970452543a25169bae181e9b03";
   // Attempted to fix CORS error with no luck
   fetch(geoQueryURL, {
     method: "GET",
@@ -51,7 +49,7 @@ function getWeatherAPI(lat, lon, cName) {
     "&lon=" +
     lon +
     "&appid=" +
-    APIKey +
+    "92878b970452543a25169bae181e9b03" +
     "&units=imperial";
   fetch(weatherQueryURL).then(function (response) {
     // Catch errors
@@ -96,7 +94,7 @@ function getForecastAPI(name) {
     "api.openweathermap.org/data/2.5/forecast?q=" +
     name +
     "&appid=" +
-    APIKey +
+    "92878b970452543a25169bae181e9b03" +
     "&units=imperial";
   fetch(forecastQueryURL).then(function (response) {
     response.json().then(function (data) {
