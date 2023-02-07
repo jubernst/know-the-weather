@@ -16,7 +16,7 @@ function getLocationAPI(city) {
     city +
     "&limit=1&appid=" +
     APIKey;
-  // CORS error
+  // Attempted to fix CORS error with no luck
   fetch(geoQueryURL, {
     method: "GET",
     body: JSON.stringify(data),
